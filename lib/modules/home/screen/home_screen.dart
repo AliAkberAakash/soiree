@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:soiree/modules/autth/social_login/controller/social_login_controller.dart';
 import 'package:soiree/utils/spacers.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +19,9 @@ const carouselImages = [
 
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  final SocialLoginController controller = SocialLoginController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,11 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             width: 20,
           ),
           const HSpacer(30),
-          Image.asset(
-            "assets/images/profile.png",
-            height: 30,
-            width: 30,
-          ),
+          _getLoginWidget(),
           const HSpacer(30),
         ],
       ),
@@ -100,23 +101,49 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _getLoginWidget(){
-    return Container(
-      padding: const EdgeInsets.all(20),
-      child: MaterialButton(
-        height: 50,
-        minWidth: MediaQuery.of(context).size.width*0.6,
-        color: Colors.pink,
-        child: const Text(
-          "Login",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20
+    return StreamBuilder<UserCredential?>(
+      stream: controller.userCredentialStream,
+      builder: (ctx, snapshot){
+        if(snapshot.hasData && snapshot.data != null){
+          return _profileWidget(snapshot.data!);
+        }else{
+          return GestureDetector(
+            onTap: (){
+              controller.signInWithGoogle();
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                "Login",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18
+                ),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _profileWidget(UserCredential credential){
+    return Row(
+      children: [
+        Text(
+          credential.user?.email ?? "Email not available",
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18
           ),
         ),
-        onPressed: (){
-          //tdo
-        },
-      ),
+        const HSpacer(20),
+        Image.asset(
+          "assets/images/profile.png",
+          height: 30,
+          width: 30,
+        )
+      ],
     );
   }
 
