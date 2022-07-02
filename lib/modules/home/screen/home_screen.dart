@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 const carouselImages = [
   "home_carousel_1.jpg",
-  "home_carousel_2.jpg",
+  "home_carousel_4.jpg",
   "home_carousel_3.jpg",
 ];
 
@@ -66,29 +66,45 @@ class _HomeScreenState extends State<HomeScreen> {
         stream: controller.userCredentialStream,
         builder: (ctx, snapshot) {
           if(snapshot.hasData && snapshot.data != null){
-            return Padding(
-              padding: EdgeInsets.all(20),
-              child: Row(
-                children: const [
-                  EventWidget(
-                    eventName: "Iftar Party",
-                    eventDate: "July 12, 2022",
-                    eventLocation: "Dhanmondi 32/A",
+            return Column(
+              children: [
+                const VSpacer(40),
+                const Text(
+                  "My Events",
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.black87,
                   ),
-                  HSpacer(20),
-                  EventWidget(
-                    eventName: "Dinner Party",
-                    eventDate: "July 12, 2022",
-                    eventLocation: "Dhanmondi 32/A",
+                ),
+                const VSpacer(20),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    children: const [
+                      EventWidget(
+                        eventName: "Music Festival",
+                        eventDate: "July 12, 2022",
+                        eventLocation: "Dhanmondi 32/A",
+                        image: "assets/images/event_image_1.jpg",
+                      ),
+                      HSpacer(20),
+                      EventWidget(
+                        eventName: "Dinner Party",
+                        eventDate: "July 12, 2022",
+                        eventLocation: "Dhanmondi 32/A",
+                        image: "assets/images/event_image_2.jpg",
+                      ),
+                      HSpacer(20),
+                      EventWidget(
+                        eventName: "Gala Night",
+                        eventDate: "July 12, 2022",
+                        eventLocation: "Dhanmondi 32/A",
+                        image: "assets/images/event_image_3.jpg",
+                      ),
+                    ],
                   ),
-                  HSpacer(20),
-                  EventWidget(
-                    eventName: "Gala Night",
-                    eventDate: "July 12, 2022",
-                    eventLocation: "Dhanmondi 32/A",
-                  ),
-                ],
-              ),
+                ),
+              ],
             );
           }else{
             return Container();

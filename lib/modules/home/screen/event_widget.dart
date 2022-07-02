@@ -6,12 +6,14 @@ class EventWidget extends StatelessWidget {
   final String eventName;
   final String eventDate;
   final String eventLocation;
+  final String image;
 
   const EventWidget({
     Key? key,
     required this.eventName,
     required this.eventDate,
     required this.eventLocation,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -33,13 +35,13 @@ class EventWidget extends StatelessWidget {
                 topRight: Radius.circular(10),
               ),
               child: Image.asset(
-                "assets/images/home_carousel_1.jpg",
+                image,
                 height: 150,
                 width: 300,
                 fit: BoxFit.fill,
               ),
             ),
-            VSpacer(10),
+            const VSpacer(10),
             Text(
               eventName,
               style: const TextStyle(
