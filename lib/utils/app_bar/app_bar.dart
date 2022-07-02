@@ -7,9 +7,9 @@ import 'package:soiree/utils/spacers.dart';
 class AppBarProvider {
 
   final BuildContext context;
-  final SocialLoginController controller = SocialLoginController();
+  final SocialLoginController controller;
 
-  AppBarProvider(this.context);
+  AppBarProvider(this.context, this.controller);
 
   AppBar getCommonAppBar(){
     return AppBar(

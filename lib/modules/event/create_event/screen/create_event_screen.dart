@@ -12,7 +12,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarProvider(context).getCommonAppBar(),
+      //appBar: AppBarProvider(context).getCommonAppBar(),
       body: ListView(
         children: [
 
