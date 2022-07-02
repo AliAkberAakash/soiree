@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "56479086475",
+    "project_id": "soiree-18fad",
+    "storage_bucket": "soiree-18fad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56479086475:android:7b0b34164b959b3acda18e",
+        "android_client_info": {
+          "package_name": "com.example.soiree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56479086475-l8g05d119dc85proi7c94lgocopjrcgd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmdS96TCBnOQo2hMA3I_iXrrSsbDNg6KI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56479086475-l8g05d119dc85proi7c94lgocopjrcgd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
