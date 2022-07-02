@@ -5,13 +5,12 @@ import 'package:soiree/modules/event/create_event/screen/create_event_screen.dar
 import 'package:soiree/utils/spacers.dart';
 
 class AppBarProvider {
-
   final BuildContext context;
   final SocialLoginController controller;
 
   AppBarProvider(this.context, this.controller);
 
-  AppBar getCommonAppBar(){
+  AppBar getCommonAppBar() {
     return AppBar(
       backgroundColor: Colors.black87,
       title: Row(
@@ -27,10 +26,7 @@ class AppBarProvider {
           const HSpacer(30),
           const Text(
             "Join Events",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 18
-            ),
+            style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           const HSpacer(30),
         ],
@@ -48,43 +44,38 @@ class AppBarProvider {
     );
   }
 
-  Widget _createEvents(){
+  Widget _createEvents() {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (ctx)=> const CreateEventScreen()));
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (ctx) => const CreateEventScreen()));
       },
       child: const Padding(
         padding: EdgeInsets.all(8.0),
         child: Text(
           "Create Events",
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 18
-          ),
+          style: TextStyle(color: Colors.white, fontSize: 18),
         ),
       ),
     );
   }
 
-  Widget _getLoginWidget(){
+  Widget _getLoginWidget() {
     return StreamBuilder<UserCredential?>(
       stream: controller.userCredentialStream,
-      builder: (ctx, snapshot){
-        if(snapshot.hasData && snapshot.data != null){
+      builder: (ctx, snapshot) {
+        if (snapshot.hasData && snapshot.data != null) {
           return _profileWidget(snapshot.data!);
-        }else{
+        } else {
           return GestureDetector(
-            onTap: (){
+            onTap: () {
               controller.signInWithGoogle();
             },
             child: const Padding(
               padding: EdgeInsets.all(10),
               child: Text(
                 "Login",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18
-                ),
+                style: TextStyle(color: Colors.white, fontSize: 18),
               ),
             ),
           );
@@ -93,22 +84,32 @@ class AppBarProvider {
     );
   }
 
-  Widget _profileWidget(UserCredential credential){
+  Widget _profileWidget(UserCredential credential) {
     return Row(
       children: [
         Text(
           credential.user?.email ?? "Email not available",
-          style: const TextStyle(
-              color: Colors.white,
-              fontSize: 18
-          ),
+          style: const TextStyle(color: Colors.white, fontSize: 18),
         ),
         const HSpacer(20),
         Image.asset(
           "assets/images/profile.png",
           height: 30,
           width: 30,
-        )
+        ),
+        const HSpacer(20),
+        GestureDetector(
+          onTap: () {
+            controller.signOut();
+          },
+          child: const Padding(
+            padding: EdgeInsets.all(10),
+            child: Text(
+              "Logout",
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+          ),
+        ),
       ],
     );
   }

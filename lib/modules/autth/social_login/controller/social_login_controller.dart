@@ -3,8 +3,8 @@ import 'package:rxdart/rxdart.dart';
 
 class SocialLoginController {
 
-  final BehaviorSubject<UserCredential> _userCredentialController = BehaviorSubject();
-  Stream<UserCredential> get userCredentialStream => _userCredentialController.stream;
+  final BehaviorSubject<UserCredential?> _userCredentialController = BehaviorSubject();
+  Stream<UserCredential?> get userCredentialStream => _userCredentialController.stream;
   UserCredential? get userCredential => _userCredentialController.valueOrNull;
 
   GoogleAuthProvider googleProvider = GoogleAuthProvider();
@@ -29,6 +29,11 @@ class SocialLoginController {
     final userCredential = await FirebaseAuth.instance.signInWithPopup(googleProvider);
 
     _userCredentialController.add(userCredential);
+  }
+
+  void signOut() async {
+    FirebaseAuth.instance.signOut();
+    _userCredentialController.add(null);
   }
 
 }
