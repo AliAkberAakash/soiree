@@ -1,11 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:soiree/modules/autth/social_login/controller/social_login_controller.dart';
+import 'package:soiree/modules/event/create_event/screen/create_event_screen.dart';
 import 'package:soiree/utils/spacers.dart';
 
 class AppBarProvider {
 
+  final BuildContext context;
   final SocialLoginController controller = SocialLoginController();
+
+  AppBarProvider(this.context);
 
   AppBar getCommonAppBar(){
     return AppBar(
@@ -29,7 +33,6 @@ class AppBarProvider {
             ),
           ),
           const HSpacer(30),
-
         ],
       ),
       actions: [
@@ -48,7 +51,7 @@ class AppBarProvider {
   Widget _createEvents(){
     return GestureDetector(
       onTap: (){
-
+        Navigator.push(context, MaterialPageRoute(builder: (ctx)=> const CreateEventScreen()));
       },
       child: const Padding(
         padding: EdgeInsets.all(8.0),
@@ -62,7 +65,6 @@ class AppBarProvider {
       ),
     );
   }
-
 
   Widget _getLoginWidget(){
     return StreamBuilder<UserCredential?>(
@@ -90,8 +92,6 @@ class AppBarProvider {
       },
     );
   }
-
-
 
   Widget _profileWidget(UserCredential credential){
     return Row(

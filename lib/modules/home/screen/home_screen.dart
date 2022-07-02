@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarProvider().getCommonAppBar(),
+      appBar: AppBarProvider(context).getCommonAppBar(),
       body: ListView(
         children: [
           _getCarouselWidget(),
@@ -36,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _getCarouselWidget(){
     return CarouselSlider(
       options: CarouselOptions(
-        autoPlay: true,
         height: MediaQuery.of(context).size.height*0.5,
       ),
       items: carouselImages.map((image) {
